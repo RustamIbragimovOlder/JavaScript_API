@@ -1,0 +1,102 @@
+<!-- Задание 4
+Вам предоставляется задача создать простой онлайн опросник, который позволяет пользователям отвечать на вопросы с вариантами ответов. Ваша задача - разработать интерфейс и функциональность для этого опросника, используя HTML, CSS и JavaScript.
+1. Создайте интерфейс с несколькими вопросами и вариантами ответов. Каждый вопрос должен иметь несколько вариантов ответов.
+2. Реализуйте обработку событий, чтобы пользователи могли выбирать варианты ответов.
+3. Добавьте кнопку "Завершить опрос", которая будет показывать результаты опроса.
+4. При нажатии на кнопку "Завершить опрос", вы должны проверить, что пользователь ответил на все вопросы, и отобразить выбранные им варианты ответов.
+5. Если пользователь не ответил на все вопросы, покажите ему сообщение о необходимости ответить на все вопросы перед завершением опроса.
+6. По желанию можно добавить стилизацию опросника с использованием CSS для лучшего пользовательского опыта. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task4</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .result {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="question">
+        <p>Вопрос 1: Какой ваш любимый цвет?</p>
+        <div class="options">
+            <label class="lable_one">
+                <input type="radio" name="q1" value="Синий" class="one" /> Синий
+            </label>
+            <label class="lable_one">
+                <input type="radio" name="q1" value="Зеленый" class="one" /> Зеленый
+            </label>
+            <label class="lable_one">
+                <input type="radio" name="q1" value="Красный" class="one" /> Красный
+            </label>
+        </div>
+    </div>
+  
+    <div class="question">
+        <p>Вопрос 2: Какое ваше любимое животное?</p>
+        <div class="options">
+            <label class="lable_two">
+                <input type="radio" name="q2" value="Собака" class="two" /> Собака
+            </label>
+            <label class="lable_two">
+                <input type="radio" name="q2" value="Кот" class="two" /> Кот
+            </label>
+            <label class="lable_two">
+                <input type="radio" name="q2" value="Попугай" class="two" /> Попугай
+            </label>
+        </div>
+    </div>
+  
+    <button id="submit">Завершить опрос</button>
+  
+    <div class="result" style="display: none">
+        <p>Результаты:</p>
+        <p>Вопрос 1: <span id="result-q1"></span></p>
+        <p>Вопрос 2: <span id="result-q2"></span></p>
+    </div>
+   
+    <script>
+        const submitButton = document.getElementById("submit");
+        const resultContainer = document.querySelector(".result");
+        const resultQ1 = document.getElementById("result-q1");
+        const resultQ2 = document.getElementById('result-q2');
+            
+        submitButton.addEventListener("click", function () {
+            // Собираем ответы
+            const q1Answer = document.querySelector('input[name="q1"]:checked');
+            const q2Answer = document.querySelector('input[name="q2"]:checked');
+            
+            if (q1Answer && q2Answer) {
+                // Отображаем результаты
+                resultQ1.textContent = q1Answer.value;
+                resultQ2.textContent = q2Answer.value;
+                resultContainer.style.display = "block";
+                // Дополнительные действия, например, отправка результатов на сервер
+            } else {
+                alert('Пожалуйста, ответьте на все вопросы.');
+            }
+        });
+    </script>
+</body>
+</html>
