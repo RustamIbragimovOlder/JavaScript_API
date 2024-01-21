@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inputs</title>
+    <style>
+        body {
+            font-size: 22px;
+            padding-left: 100px;
+            padding-top: 200px;
+        }
+      </style>
+</head>
+<body>
+    <form name="superForm">
+        <p>
+            email: <input type="email" name="email">
+        </p>
+        <div>
+            selectForm: <select name="selectForm">
+                <option value="GeekBrains">ГикБрейнс</option>
+                <option value="SkillBox">СкиллБокс</option>
+                <option value="SkillFactory">СкиллФэктори</option>
+            </select>
+        </div>
+        <p>
+            checkbox: <input type="checkbox" name="checkbox">
+        </p>
+    </form>
+  
+    <script>
+        const formElem = document.forms.superForm;
+  
+        // событие в input по имени email
+        formElem.email.onchange = () => {
+            console.log("change - email: ", formElem.email.value);
+            // в консоли выведется после снятия фокусировки
+        };
+        formElem.email.oninput = () => {
+            console.log("inpup - email: ", formElem.email.value);
+            // в консоли выводится в процессе изменения поля input
+        };
+  
+        // событие в объекте с именем selectForm
+        formElem.selectForm.onchange = () => {
+            console.log("change - selectForm: ", formElem.selectForm.value);
+            // в консоли событие отрабатывается так же как и в oninput
+        };
+        formElem.selectForm.oninput = () => {
+            console.log("input - selectForm: ", formElem.selectForm.value);
+            // в консоли событие отрабатывается так же как и в onchange
+        };
+  
+        // с обытие в объекте с именем checkbox
+        formElem.checkbox.onchange = () => {
+            console.log("change - checkbox: ", formElem.checkbox.checked);
+            // change - checkbox:  true
+        };
+        formElem.checkbox.oninput = () => {
+           console.log("input - checkbox: ", formElem.checkbox.checked);
+           // input - checkbox:  true
+        };
+
+        formElem.email.oncut = formElem.email.oncopy = formElem.email.onpaste = (event) => {
+            console.log(event.type + ' - ' + event.clipboardData.getData('text/plain'));
+        }
+    </script>
+</body>
+</html>

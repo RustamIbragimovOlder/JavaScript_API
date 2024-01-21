@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter</title>
+    <style>
+        body {
+            font-size: 22px;
+            left: 300px;
+            top: 200px;
+        }
+        .product-item {
+            margin-top: 20px;
+        }
+      </style>
+</head>
+<body>
+    <h2>Список товаров</h2>
+    <label for="sort-select">Сортировка: </label>
+    <select id="sort-select">
+        <option value="asc">По возрастанию цены</option>
+        <option value="desc">По убыванию цены</option>
+    </select>
+
+    <ul id="product-list">
+        <li class="product-item">Товар 1 - $50</li>
+        <li class="product-item">Товар 2 - $30</li>
+        <li class="product-item">Товар 3 - $70</li>
+        <li class="product-item">Товар 4 - $20</li>
+    </ul>
+
+    <!-- кнопка -->
+    <button class="btn">Сортировать</button>
+    <ul id="product-list2">
+        <li class="product-item2">50</li>
+        <li class="product-item2">30</li>
+        <li class="product-item2">70</li>
+        <li class="product-item2">20</li>
+    </ul>
+
+    <!--  -->
+    <script>
+        // ссылка на select для выбора сортировки
+        const sortSelectElem = document.querySelector("#sort-select");
+
+        // список ul
+        const productListElem = document.querySelector("#product-list");
+
+        // массив продуктов
+        const produtcItemElem = Array.from(document.querySelectorAll(".product-item"));
+
+        console.log(sortSelectElem);
+        console.log(productListElem);
+        console.log(produtcItemElem);
+
+        sortSelectElem.onchange = function () {
+            const selectOption = sortSelectElem.value; // Получение опции сортировки
+
+            // Сортировка списка товаров по цене
+            if (selectOption === "asc") {
+                produtcItemElem.sort((a, b) => {
+                    // вытаскиваем стоимость
+                    const priceA = parseInt(a.textContent.split("- $")[1]);
+                    const priceB = parseInt(b.textContent.split("- $")[1]);
+                    return priceA - priceB;
+                });
+            } else if (selectOption === "desc") {
+                produtcItemElem.sort((a, b) => {
+                    // вытаскиваем стоимость
+                    const priceA = parseInt(a.textContent.split("- $")[1]);
+                    const priceB = parseInt(b.textContent.split("- $")[1]);
+                    return priceB - priceA;
+                });
+            }
+
+            // обновляем список
+            produtcItemElem.forEach((item) => productListElem.appendChild(item));
+        };
+
+        // кнопка
+        const btnElem = document.querySelector(".btn");
+        const produtcItemElem2 = Array.from(document.querySelectorAll(".product-item2"));
+        const productListElem2 = document.querySelector("#product-list2");
+
+        btnElem.addEventListener("click", () => {
+            produtcItemElem2.sort((a, b) => {
+                // вытаскиваем стоимость
+                const priceA = parseInt(a.textContent);
+                const priceB = parseInt(b.textContent);
+                return priceA - priceB;
+            });
+            // обновляем список
+            produtcItemElem2.forEach((item) => productListElem2.appendChild(item));
+        });
+    </script>
+    
+</body>
+</html>

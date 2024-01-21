@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select2 Выбор страны</title>
+</head>
+<body>
+    <!-- Вы разрабатываете веб-приложение для выблоа и отображения данных о странах. У вас есть форма, включающая элемент select, в котором пользователь может выбрать определенную страну. При выборе страны вам необходимо динамически обновлять другой элемент на странице, например, столица. -->
+    <h2>Выберите страну: </h2>
+    <form id="country-form">
+        <select id="country-select" class="form">
+            <!-- выпадающий список  -->
+            <option value="">Выберите страну</option>
+            <option value="russia">Россия</option>
+            <option value="usa">США</option>
+            <option value="china">Китай</option>
+            <option value="czech">Чехия</option>
+        </select>
+    </form>
+
+    <h2>Столица: </h2>
+    <p id="capitai-info">Выберите страну, чтобы узнать столицу.</p>
+
+    <!--  -->
+    <script>
+        const selectElement = document.getElementById("country-select");
+        // const selectElement = document.querySelector('#country-select');
+        const capitalInfoElement = document.getElementById("capitai-info");
+        // const capitalInfoElement = document.querySelector('#capitai-info');
+        
+        selectElement.onchange = function () {
+            const selectedCounty = selectElement.value;
+            console.log(selectedCounty);
+            let capital = '';
+            
+            // определяем столицу
+            switch (selectedCounty) {
+                case "russia":
+                    capital = "Москва";
+                    break;
+                case "usa":
+                    capital = "Вашингтон";
+                    break;
+                case "china":
+                    capital = "Пекин";
+                    break;
+                case "czech":
+                    capital = "Прага";
+                    break;
+                default:
+                    capital = "Выберите страну, чтобы узнать столицу";
+                    break;
+            }
+
+            // Обновляем информацию
+            capitalInfoElement.textContent = capital;
+        };
+    </script>
+</body>
+</html>
+
+<!-- selectElem.onchange = function () {} 
+Это тоже самое, что и событие change
+selectElem.addEventListener('change', () => {})
+-->
+    

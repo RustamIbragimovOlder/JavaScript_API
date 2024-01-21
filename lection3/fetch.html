@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch</title>
+</head>
+<body>
+    <script>
+        'use strict';
+        (async () => {
+            const url = 'https://catfact.ninja/fact';
+            const respone = await fetch(url);
+            console.log(respone.status);
+            console.log(respone.ok);
+            const fact = await respone.json();
+            console.log(fact);
+        })();
+        // response.json() - JSON
+        // response.text() - текст
+        // response.blob() - Blob (бинарные данные с типом)
+        // response.arrayBuffer() - АrrayBuffer (низкоуровневое представление бинарных данных)
+        // response.formData() - объект FormData
+        // response.body — объект ReadableStream, с помощью которого можно считывать тело запроса по частям
+        'use strict';
+        fetch("https://catfact.ninja/fact")
+            .then((respone) => respone.json())
+            .then(console.log);
+
+        // Или для вывода только факта  
+        fetch("https://catfact.ninja/fact")
+            .then((respone) => respone.json())
+            .then((obj) => console.log(obj.fact));
+    </script>
+</body>
+</html>
